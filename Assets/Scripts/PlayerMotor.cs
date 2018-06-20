@@ -5,6 +5,10 @@ public class PlayerMotor : MonoBehaviour {
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
+    private Vector3 cameraRotation = Vector3.zero;
+
+    [SerializeField]
+    private Camera cam;
 
     private Rigidbody rb;
 
@@ -21,6 +25,11 @@ public class PlayerMotor : MonoBehaviour {
     public void Rotate(Vector3 _rotation)
     {
         rotation = _rotation;
+    }
+
+    public void RotateCamera(Vector3 _cameraRotation)
+    {
+        cameraRotation = _cameraRotation;
     }
 
     //Run Physics
@@ -43,6 +52,10 @@ public class PlayerMotor : MonoBehaviour {
         if (rotation != Vector3.zero)
         {
             rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+        }
+        if(cam != null)
+        {
+            cam.transform.Rotate(-cameraRotation);
         }
     }
 }

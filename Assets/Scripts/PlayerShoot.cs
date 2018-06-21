@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour {
-
-    public PlayerWeapon weapon;
 
     [SerializeField]
     private Camera cam;
 
     [SerializeField]
     private LayerMask mask;
+
+    private WeaponManager weaponManager;
+
+    private PlayerWeapon currentWeapon;
 
     private void Start()
     {
@@ -18,13 +21,28 @@ public class PlayerShoot : NetworkBehaviour {
             Debug.LogError("PlayerShoot: No camera referenced");
             this.enabled = false;
         }
+
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     private void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        currentWeapon = weaponManager.GetCurrentWeapon();
+        if (currentWeapon.rateOfFire <= 0f)
         {
-            Shoot();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
+        } else
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                InvokeRepeating("Shoot", 0f, 1f/currentWeapon.rateOfFire);
+            } else if(Input.GetButtonUp("Fire1"))
+            {
+                CancelInvoke("Shoot");
+            }
         }
     }
 
@@ -32,11 +50,11 @@ public class PlayerShoot : NetworkBehaviour {
     private void Shoot()
     {
         RaycastHit _hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, currentWeapon.range, mask))
         {
             if(_hit.collider.tag == "Enemy")
             {
-                CmdEnemyShot(_hit.collider.name, weapon.damage);
+                CmdEnemyShot(_hit.collider.name, currentWeapon.damage);
             }
         }
     }
@@ -48,7 +66,7 @@ public class PlayerShoot : NetworkBehaviour {
 
         Player _player = GameManager.GetPlayer(_playerID);
 
-        _player.TakeDamage(_damage);
+        _player.RpcTakeDamage(_damage);
     }
 
     [Command]
@@ -58,6 +76,6 @@ public class PlayerShoot : NetworkBehaviour {
 
         Enemy _enemy = GameManager.GetEnemy(_enemyID);
 
-        _enemy.TakeDamage(_damage);
+        _enemy.RpcTakeDamage(_damage);
     }
 }

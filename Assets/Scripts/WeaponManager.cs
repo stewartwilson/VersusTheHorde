@@ -22,12 +22,14 @@ public class WeaponManager : NetworkBehaviour {
     void EquipWeapon(PlayerWeapon _weapon)
     {
         currentWeapon = _weapon;
-        GameObject _weaponInst = (GameObject)Instantiate(_weapon.graphics, weaponHolder.position,Quaternion.Euler(_weapon.rotationOffset));
+        GameObject _weaponInst = (GameObject)Instantiate(_weapon.graphics, weaponHolder.position, weaponHolder.rotation);
         _weaponInst.transform.SetParent(weaponHolder);
 
         currentGraphics = _weaponInst.GetComponent<WeaponGraphics>();
 
-        if(currentGraphics == null)
+        _weaponInst.transform.Rotate(new Vector3(0, 90, 0));
+
+        if (currentGraphics == null)
         {
             Debug.LogError("No weapons graphics component on the weapon object: " + _weaponInst.name);
         }

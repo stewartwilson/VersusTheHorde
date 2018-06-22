@@ -434,7 +434,6 @@ MonoBehaviour:
   - {fileID: 114159981036145252}
   - {fileID: 20448795994185492}
   - {fileID: 81914074697806912}
-  - {fileID: 114972726329068854}
   - {fileID: 20688667566403774}
   remoteLayerName: RemotePlayer
   dontDrawLayerName: DontDraw
@@ -507,7 +506,7 @@ MonoBehaviour:
   cam: {fileID: 20448795994185492}
   mask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4294965759
 --- !u!124 &124284538024104162
 Behaviour:
   m_ObjectHideFlags: 1

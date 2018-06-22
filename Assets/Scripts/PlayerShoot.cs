@@ -28,6 +28,7 @@ public class PlayerShoot : NetworkBehaviour {
     private void Update()
     {
         currentWeapon = weaponManager.GetCurrentWeapon();
+        
         if (currentWeapon.rateOfFire <= 0f)
         {
             if (Input.GetButtonDown("Fire1"))
@@ -46,9 +47,48 @@ public class PlayerShoot : NetworkBehaviour {
         }
     }
 
+    //This is called on server when a player shoots
+    [Command]
+    private void CmdOnShoot()
+    {
+        RpcDoShootEffect();
+    }
+
+    //This is called on all clietns when a a shoot effect
+    // is needed
+    [ClientRpc]
+    private void RpcDoShootEffect()
+    {
+        weaponManager.GetCurrentWeaponGraphics().muzzleFlash.Play();
+    }
+
+    //Is called on the server when soemthing is hit
+    [Command]
+    void CmdOnHit(Vector3 _pos, Vector3 _normal)
+    {
+        RpcDoHitEffect(_pos, _normal);
+    }
+
+    //Is called on all clients
+    [ClientRpc]
+    void RpcDoHitEffect(Vector3 _pos, Vector3 _normal)
+    {
+        GameObject hitEffect = Instantiate(weaponManager.GetCurrentWeaponGraphics().hitEffectPrefab, 
+            _pos, Quaternion.LookRotation(_normal));
+
+        Destroy(hitEffect, 2f);
+    }
+
     [Client]
     private void Shoot()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+        //Call the on shoot method on server
+        CmdOnShoot();
+
         RaycastHit _hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, currentWeapon.range, mask))
         {
@@ -56,6 +96,9 @@ public class PlayerShoot : NetworkBehaviour {
             {
                 CmdEnemyShot(_hit.collider.name, currentWeapon.damage);
             }
+
+            // gets the location of the bullet hit
+            CmdOnHit(_hit.point, _hit.normal);
         }
     }
 

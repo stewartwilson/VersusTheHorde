@@ -50,11 +50,15 @@ public class MasterPlayerSetup : NetworkBehaviour
     {
         base.OnStartClient();
 
+
+
         string _netID = GetComponent<NetworkIdentity>().netId.ToString();
 
         MasterPlayer _player = GetComponent<MasterPlayer>();
 
         GameManager.RegisterPlayer(_netID, _player);
+
+        GameManager.RegisterMaster(_netID);
     }
 
     private void DisableComponents()

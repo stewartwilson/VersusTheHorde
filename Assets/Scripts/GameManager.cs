@@ -27,6 +27,12 @@ public class GameManager : MonoBehaviour {
     
     private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
+    private static string masterNetID;
+
+    public static void RegisterMaster(string _netID)
+    {
+        masterNetID = _netID;
+    }
 
     public static void RegisterPlayer(string _netID, Player _player)
     {

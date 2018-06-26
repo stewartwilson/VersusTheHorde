@@ -296,8 +296,8 @@ MonoBehaviour:
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
-  m_OfflineScene: 
-  m_OnlineScene: 
+  m_OfflineScene: Lobby
+  m_OnlineScene: TestScene
   m_SpawnPrefabs:
   - {fileID: 1218489466162450, guid: 49c543d72724df94d81636ab8120d5a8, type: 2}
   - {fileID: 1426045213562490, guid: a294b230b248f1246b031b9f7e7efa84, type: 2}
@@ -343,7 +343,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -356,9 +356,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  masterPlayerPrefab: {fileID: 1218489466162450, guid: 49c543d72724df94d81636ab8120d5a8,
-    type: 2}
   masterPlayerSpawnPoint: {fileID: 1100526949}
+  masterID: 0
 --- !u!1001 &453705171
 Prefab:
   m_ObjectHideFlags: 0

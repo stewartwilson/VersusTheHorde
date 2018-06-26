@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 114695168461883286}
   - component: {fileID: 114213164313973570}
   - component: {fileID: 114435038985159192}
+  - component: {fileID: 114795259307655334}
   m_Layer: 0
   m_Name: MasterPlayer
   m_TagString: Untagged
@@ -325,6 +326,27 @@ MonoBehaviour:
   dontDrawLayerName: DontDraw
   masterPlayerUIPrefab: {fileID: 1909728730455608, guid: a9ab5b49308b0ce4d85b89f622fdc32a,
     type: 2}
+--- !u!114 &114795259307655334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218489466162450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114897131144292830
 MonoBehaviour:
   m_ObjectHideFlags: 1

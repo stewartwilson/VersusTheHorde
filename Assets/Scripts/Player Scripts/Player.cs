@@ -22,13 +22,26 @@ public class Player : NetworkBehaviour {
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
-    public void Setup ()
+    public void PlayerSetup()
+    {
+        CmdBroadcastNewPlayerSetup();
+    }
+
+    [Command]
+    private void CmdBroadcastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+    }
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
     {
         wasEnabled = new bool[disableOnDeath.Length];
         for (int i = 0; i < wasEnabled.Length; i++)
         {
             wasEnabled[i] = disableOnDeath[i].enabled;
         }
+
         SetDefaults();
     }
 
@@ -102,11 +115,15 @@ public class Player : NetworkBehaviour {
         {
             yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 
-            SetDefaults();
+            
             Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
 
             transform.position = _spawnPoint.position;
             transform.rotation = _spawnPoint.rotation;
+
+            yield return new WaitForSeconds(.1f);
+
+            PlayerSetup();
         }
     }
 }

@@ -43,9 +43,10 @@ public class PlayerSetup : NetworkBehaviour {
             //Create player UI
             playerUIInstance = Instantiate(playerUIPrefab);
             playerUIInstance.name = playerUIPrefab.name;
-        }
 
-        GetComponent<Player>().Setup();
+            GetComponent<Player>().PlayerSetup();
+        }
+        
     }
 
     public override void OnStartClient()

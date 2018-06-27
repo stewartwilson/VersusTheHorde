@@ -286,6 +286,7 @@ MonoBehaviour:
   enemyLayerName: Enemy
   enemies:
   - {fileID: 1426045213562490, guid: a294b230b248f1246b031b9f7e7efa84, type: 2}
+  - {fileID: 1446658372917354, guid: 0db897468a81ff347ba2a69a2834dd6a, type: 2}
   enemyHolder: {fileID: 0}
 --- !u!114 &114473176565021298
 MonoBehaviour:

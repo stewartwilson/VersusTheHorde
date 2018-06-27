@@ -18,7 +18,7 @@ public class EnemySpawnManager : NetworkBehaviour {
 	void Start () {
         if (enemies != null && enemies.Count > 0)
         {
-            currentEnemy = enemies[0];
+            currentEnemy = enemies[1];
         }
     }
 

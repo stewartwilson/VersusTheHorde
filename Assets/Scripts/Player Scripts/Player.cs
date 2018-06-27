@@ -11,6 +11,14 @@ public class Player : NetworkBehaviour {
     private int currentHealth;
 
     [SyncVar]
+    private bool _isMasterPlayer;
+    public bool isMasterPlayer
+    {
+        get { return _isMasterPlayer; }
+        protected set { _isMasterPlayer = value; }
+    }
+
+    [SyncVar]
     private bool _isDead = false;
     public bool isDead
     {

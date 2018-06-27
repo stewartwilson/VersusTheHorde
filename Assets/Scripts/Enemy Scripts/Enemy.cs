@@ -52,6 +52,8 @@ public class Enemy : NetworkBehaviour {
 
         Debug.Log(transform.name + " is Dead");
 
+        NetworkServer.Destroy(gameObject);
+
         //Call respawn
 
     }

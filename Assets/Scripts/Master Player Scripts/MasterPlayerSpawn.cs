@@ -56,7 +56,7 @@ public class MasterPlayerSpawn : NetworkBehaviour {
         {
             return;
         }
-        //Call the on shoot method on server
+        //Call the on spawn method on server
         spawnManager.SpawnEnemy(cursor.transform.position,Quaternion.Euler(new Vector3(0f,cursor.transform.rotation.y,0f)));
     }
 }

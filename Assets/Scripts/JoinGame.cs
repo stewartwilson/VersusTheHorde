@@ -18,8 +18,8 @@ public class JoinGame : MonoBehaviour {
 
     private void Start()
     {
-        networkManager = NetworkManager.singleton;
-        if(networkManager.matchMaker == null)
+        networkManager = NetworkLobbyManager.singleton;
+        if (networkManager.matchMaker == null)
         {
             networkManager.StartMatchMaker();
         }
